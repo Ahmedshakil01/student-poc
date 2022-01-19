@@ -45,28 +45,30 @@
 
                 <div class="card h-100">
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="ml-5">
+                    @foreach($comments as $comment)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="ml-5">
 
-                                    <img src="..." class="rounded mx-auto d-block" alt="...">
-                                    <h4>name</h4>
-                                    <p>age</p>
+                                        <img src="..." class="rounded mx-auto d-block" alt="...">
+                                        <h4>{{ $comment->name }}</h4>
+                                        <p>{{ $comment->age }}</p>
+
+                                    </div>
 
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <div class="container">
-                                    <span id="rateMe2"  class="empty-stars"></span>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <span id="rateMe2"  class="empty-stars"></span>
+                                    </div>
+                                    <p class="card-text">{{ $comment->comment }}</p>
                                 </div>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
                             </div>
                         </div>
-                    </div>
+                        @endforeach
 
                 </div>
             </div>
