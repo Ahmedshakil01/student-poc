@@ -36,7 +36,7 @@
                         </tbody>
 
                     </table>
-                    {{ $contents->links() }}
+{{--                    {{ $contents->links() }}--}}
                 </div>
             </div>
         </div>

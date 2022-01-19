@@ -36,6 +36,21 @@ class CommentService
         return false;
     }
 
+    public function updateFaq($input, $id)
+    {
+        try {
+            $Faq = $this->commentRepository->find($id);
+            $this->commentRepository->update($input, $id);
+            return $Faq;
+        } catch (ModelNotFoundException $e) {
+            Log::error('Not found');
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
+        return false;
+    }
+
+
     public function commentCreate($input)
     {
         $output['name'] = $input['name'];
@@ -46,6 +61,14 @@ class CommentService
         $output['created_by'] = Auth::id();
         $output['created_at'] = Carbon::now();
         return $this->storeComment($output);
+    }
+
+    public function commentUpdate($input, $id)
+    {
+        $output['status'] = $input['status'];
+        $output['updated_by'] = Auth::id();
+        $output['updated_at'] = Carbon::now();
+        return $this->updateFaq($output, $id);
     }
 
 

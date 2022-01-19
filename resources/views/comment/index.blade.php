@@ -21,6 +21,7 @@
                                 <th>Rating</th>
                                 <th>Comment</th>
                                 <th>Submitted by</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
 
@@ -34,29 +35,29 @@
                                     <td>{{ $comment->age }}</td>
                                     <td>{{ $comment->rating }}</td>
                                     <td>{{ $comment->comment }}</td>
-                                    <td>{{ $comment->created_by }}</td>
+                                    <td>{{ $comment->createdBy->name }}</td>
+                                    <td>
+                                        @if($comment->status === 0)
+                                            {{'Negative'}}
+                                        @elseif($comment->status === 1)
+                                            {{'Positive'}}
+                                        @else
+                                            {{ 'Not given any status' }}
+                                            @endif
+                                    </td>
                                     <td>
                                         <button class="btn btn-primary">
                                             <a href="{{ route('comment.edit', $comment->id) }}" method="GET">
-                                                Edit
+                                                Update Status
                                             </a>
                                         </button>
-
-                                        <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button class="btn btn-danger text-dark" type="submit" onclick="return confirm('Are you sure to delete this?');">
-                                               delete
-                                            </button>
-                                        </form>
-
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
 
                     </table>
-                    {{ $comments->links() }}
+{{--                    {{ $comments->links() }}--}}
                 </div>
             </div>
         </div>

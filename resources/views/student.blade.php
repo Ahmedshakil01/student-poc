@@ -20,7 +20,11 @@
                     <div class="col-md-8">
                         <h4>Top Responses</h4>
                         <ul class="list-unstyled">
-                            <li>Kyle jones</li>
+                            @foreach($responses as $response)
+                                <li>{{ $response->createdBy->name }}
+                                    <span>{{ $response->rating }}</span>
+                                </li>
+                                @endforeach
                         </ul>
                         <h6>Average Response rating</h6>
 
@@ -51,7 +55,7 @@
                                 <div class="row">
                                     <div class="ml-5">
 
-                                        <img src="..." class="rounded mx-auto d-block" alt="...">
+{{--                                        <img src="..." class="rounded mx-auto d-block" alt="...">--}}
                                         <h4>{{ $comment->name }}</h4>
                                         <p>{{ $comment->age }}</p>
 

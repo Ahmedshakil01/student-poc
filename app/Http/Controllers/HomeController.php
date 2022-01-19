@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function index(){
         $content = Content::with('createdBy')->first();
         $comments = Comment::with('createdBy')->take(3)->get();
-        return view('student',compact('content','comments'));
+        $responses = Comment::with('createdBy')->orderBy('rating','DESC')->take(3)->get();
+        return view('student',compact('content','comments','responses'));
     }
 }

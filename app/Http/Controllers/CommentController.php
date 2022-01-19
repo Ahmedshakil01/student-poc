@@ -24,7 +24,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::with('createdBy')->get();
+        return view('comment.index', compact('comments'));
     }
 
     /**
@@ -73,7 +74,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comment.edit',compact('comment'));
     }
 
     /**
@@ -83,9 +84,15 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, $id)
     {
-        //
+        try {
+            $this->commentService->commentUpdate( $request->except( '_token' ), $id );
+        } catch ( \Exception $e ) {
+            Log::error( $e->getMessage() );
+            return back()->withInput( $request->all())->with('error','Failed');
+        }
+        return redirect()->route('comment.index')->with('success','Success');
     }
 
     /**

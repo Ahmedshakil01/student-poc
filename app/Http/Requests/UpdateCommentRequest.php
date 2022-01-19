@@ -24,11 +24,7 @@ class UpdateCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'age' => 'required',
-            'rating' => 'required',
-            'comment' => 'required|string',
+            'status' => 'required',
         ];
     }
 }
